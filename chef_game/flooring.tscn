@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsbsttt37trjq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_x4o2w"]
+
+[node name="Flooring" type="Sprite2D"]
+z_index = -2
+texture_filter = 1
+scale = Vector2(1.4375, 1.4375)
+texture = SubResource("CompressedTexture2D_x4o2w")
