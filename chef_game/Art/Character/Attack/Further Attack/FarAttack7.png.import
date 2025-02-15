@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fitg3dv8u0st"
-path="res://.godot/imported/flooring-export.png-8f32fe54d72ab79f314d56e5072d72f6.ctex"
+uid="uid://d3rjkusf8x7rv"
+path="res://.godot/imported/FarAttack7.png-8665bb2ca218ce5d3b8aed764ff41617.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://flooring-export.png"
-dest_files=["res://.godot/imported/flooring-export.png-8f32fe54d72ab79f314d56e5072d72f6.ctex"]
+source_file="res://Art/Character/Attack/Further Attack/FarAttack7.png"
+dest_files=["res://.godot/imported/FarAttack7.png-8665bb2ca218ce5d3b8aed764ff41617.ctex"]
 
 [params]
 

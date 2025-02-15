@@ -1,11 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://wdamu38bp22o"]
 
-[ext_resource type="Texture2D" uid="uid://xm70cd1h2uf6" path="res://Table.png" id="1_ljkr3"]
+[ext_resource type="Texture2D" uid="uid://xm70cd1h2uf6" path="res://Art/Table.png" id="1_ljkr3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mu2n"]
 size = Vector2(180, 38)
 
 [node name="BasicTable" type="StaticBody2D"]
+scale = Vector2(0.707096, 0.707096)
+collision_layer = 16
+collision_mask = 3
 
 [node name="Table" type="Sprite2D" parent="."]
 texture_filter = 1

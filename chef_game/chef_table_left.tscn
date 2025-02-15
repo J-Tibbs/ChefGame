@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://djx45n4ordvch"]
+
+[ext_resource type="Texture2D" uid="uid://dfuj405iri2hr" path="res://Art/ChefTableLeft.png" id="1_270g8"]
+[ext_resource type="Script" path="res://ChefSpot.gd" id="2_qyabj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mu2n"]
+size = Vector2(180, 38)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3787w"]
+radius = 7.07118
+height = 39.5986
+
+[node name="BasicTable" type="StaticBody2D"]
+scale = Vector2(0.707096, 0.707096)
+collision_layer = 16
+collision_mask = 3
+
+[node name="Table" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(2.36719, 2.36719)
+texture = ExtResource("1_270g8")
+
+[node name="Table2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_2mu2n")
+
+[node name="Cutting Board" type="Area2D" parent="." groups=["CuttingBoard"]]
+collision_layer = 0
+script = ExtResource("2_qyabj")
+
+[node name="Left Side" type="CollisionShape2D" parent="Cutting Board"]
+position = Vector2(-49.4983, -25.4563)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3787w")
+
+[node name="Mixing" type="Area2D" parent="." groups=["MixingBowl"]]
+collision_layer = 0
+script = ExtResource("2_qyabj")
+
+[node name="Right Side" type="CollisionShape2D" parent="Mixing"]
+position = Vector2(49.4982, -25.4563)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_3787w")
+
+[connection signal="body_entered" from="Cutting Board" to="Cutting Board" method="_on_body_entered"]
+[connection signal="body_exited" from="Cutting Board" to="Cutting Board" method="_on_body_exited"]
+[connection signal="body_entered" from="Mixing" to="Mixing" method="_on_body_entered"]
+[connection signal="body_exited" from="Mixing" to="Mixing" method="_on_body_exited"]
