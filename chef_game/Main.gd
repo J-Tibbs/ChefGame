@@ -10,5 +10,5 @@ func spawn_mob():
 
 
 func _on_timer_timeout() -> void:
-	pass
-	#spawn_mob()
+	#pass
+	spawn_mob()

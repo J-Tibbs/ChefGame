@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://clk1pbe1onyxb"]
+
+[ext_resource type="Texture2D" uid="uid://dgksc8o37oa3w" path="res://Art/Pantry.png" id="1_81t8w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l0hdq"]
+size = Vector2(72, 69)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.13687e-13, -38)
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("1_81t8w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_l0hdq")
