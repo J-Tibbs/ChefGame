@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Chef Game"
-run/main_scene="res://node_2d.tscn"
+run/main_scene="res://MainScene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Enemies="Enemy Groupings"
 Player=""
+MobDrop=""
 
 [input]
 
@@ -63,6 +64,7 @@ inventory={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Monster"
 2d_physics/layer_3="Player Hit"
+2d_physics/layer_4="MobDrop"
 2d_physics/layer_5="Environment"
 
 [rendering]

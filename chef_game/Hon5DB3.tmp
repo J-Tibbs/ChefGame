@@ -53,16 +53,13 @@ scale = Vector2(1.00741, 1.00741)
 texture = ExtResource("2_rfvsu")
 
 [node name="Shadow" type="Sprite2D" parent="Slime"]
-z_index = -2
+z_index = -1
 position = Vector2(0.903953, -5.42373)
 scale = Vector2(1.28814, 1.28814)
 texture = ExtResource("4_6dq81")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." groups=["Enemies"]]
-collision_layer = 0
-collision_mask = 0
-mass = 0.001
-gravity_scale = 0.0
+script = ExtResource("1_cxece")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(1, 9)

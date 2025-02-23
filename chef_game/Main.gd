@@ -1,5 +1,6 @@
 extends Node2D
 @onready var path_follow = $Path2D/PathFollow2D
+var canSpawn = false
 func ready():
 	pass
 func spawn_mob():
@@ -10,5 +11,6 @@ func spawn_mob():
 
 
 func _on_timer_timeout() -> void:
-	#pass
-	spawn_mob()
+	canSpawn = $Forest1Detect.get_player_enter()
+	if canSpawn:
+		spawn_mob()

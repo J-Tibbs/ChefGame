@@ -6,6 +6,12 @@ var attackAnim = false
 var fire_once = 1
 var health = 100
 var canMove = true
+var ingredients = {"Honey": 0}
+var activeRecipe = null
+var recipeList = []
+var currentStep = null
+var currentStepDone = false
+
 
 func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -51,3 +57,31 @@ func setMoving(can) -> void:
 	canMove = can
 func getMoving() -> bool:
 	return canMove
+
+func get_ingredient(ingred_name) -> void:
+	if !ingredients.has(ingred_name):
+		ingredients[ingred_name] == 0
+	ingredients[ingred_name] += 1
+	update_ui(ingredients[ingred_name])
+	
+func update_ui(amount):
+	$CanvasLayer/Score.text = str(amount)
+	
+func add_recipe(recipe):
+	recipeList.append(recipe)
+	print(recipe)
+	if len(recipeList) == 1 and activeRecipe == null:
+		activeRecipe = recipeList[0]
+		recipeList.pop_front()
+		print(activeRecipe)
+		currentStep = activeRecipe[1][0]
+		print(currentStep)
+		
+#i want the list to be made up of ("name", [step1-3])
+
+func finish_recipe():
+	if !(recipeList.is_empty()):
+		activeRecipe = null
+	else:
+		activeRecipe = recipeList[0]
+		print(activeRecipe)

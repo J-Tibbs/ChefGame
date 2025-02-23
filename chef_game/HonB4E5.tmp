@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bhbnmah0qkp64"]
+[gd_scene load_steps=10 format=3 uid="uid://bhbnmah0qkp64"]
 
 [ext_resource type="Script" path="res://honey_slime.gd" id="1_cxece"]
 [ext_resource type="Texture2D" uid="uid://dleqhrwmu8hm7" path="res://Art/HoneySlime/HoneySlime.png" id="1_jemey"]
 [ext_resource type="Texture2D" uid="uid://dwqgjxgsuclnk" path="res://Art/HoneySlime/HoneySlimeHurt.png" id="2_rfvsu"]
 [ext_resource type="Texture2D" uid="uid://dr4iu6q50xny4" path="res://Art/HoneySlime/SlimeShadow.png" id="4_6dq81"]
+[ext_resource type="Script" path="res://SlimeRB.gd" id="5_f8a4q"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6xpr"]
 radius = 20.0
@@ -53,16 +54,13 @@ scale = Vector2(1.00741, 1.00741)
 texture = ExtResource("2_rfvsu")
 
 [node name="Shadow" type="Sprite2D" parent="Slime"]
-z_index = -2
+z_index = -1
 position = Vector2(0.903953, -5.42373)
 scale = Vector2(1.28814, 1.28814)
 texture = ExtResource("4_6dq81")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="." groups=["Enemies"]]
-collision_layer = 0
-collision_mask = 0
-mass = 0.001
-gravity_scale = 0.0
+script = ExtResource("5_f8a4q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(1, 9)

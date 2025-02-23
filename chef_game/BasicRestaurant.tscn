@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cpi8gfugkkyqy"]
+[gd_scene load_steps=16 format=4 uid="uid://cpi8gfugkkyqy"]
 
 [ext_resource type="Texture2D" uid="uid://fitg3dv8u0st" path="res://Art/Floors/flooring-export.png" id="1_5sekp"]
 [ext_resource type="Texture2D" uid="uid://ckde0jjjcihak" path="res://Art/Floors/WoodFloor.png" id="2_lo4df"]
@@ -6,6 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://cheld3aomhv4o" path="res://walls.png" id="4_65f76"]
 [ext_resource type="PackedScene" uid="uid://7th10lud5sha" path="res://chef_table_right.tscn" id="5_igpv6"]
 [ext_resource type="PackedScene" uid="uid://djx45n4ordvch" path="res://chef_table_left.tscn" id="5_p1yqh"]
+[ext_resource type="PackedScene" uid="uid://47l0472hilgf" path="res://Fridge.tscn" id="7_www63"]
+[ext_resource type="PackedScene" uid="uid://yqps640n5yxx" path="res://Pantry.tscn" id="8_sk88j"]
+[ext_resource type="PackedScene" uid="uid://cxqxr8kypferx" path="res://Stove.tscn" id="9_v2hf8"]
+[ext_resource type="PackedScene" uid="uid://dkkeaqc6d7l75" path="res://OrderTable.tscn" id="10_lnohp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0huec"]
 texture = ExtResource("1_5sekp")
@@ -857,3 +861,19 @@ scale = Vector2(1.222, 1.027)
 [node name="LeftTable" parent="Chef Tables" instance=ExtResource("5_p1yqh")]
 position = Vector2(-242, 150)
 scale = Vector2(1.222, 1.027)
+
+[node name="Fridge" parent="." instance=ExtResource("7_www63")]
+position = Vector2(-296, -80)
+scale = Vector2(2.12, 2.12)
+
+[node name="Pantry" parent="." instance=ExtResource("8_sk88j")]
+position = Vector2(272, -80)
+scale = Vector2(2.12, 2.12)
+
+[node name="Oven" parent="." instance=ExtResource("9_v2hf8")]
+position = Vector2(152, -80)
+scale = Vector2(2.12, 2.12)
+
+[node name="Area2D" parent="." instance=ExtResource("10_lnohp")]
+position = Vector2(-45, 240)
+scale = Vector2(2.8, 2.8)

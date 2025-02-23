@@ -3,11 +3,13 @@ extends Area2D
 var is_cutting = false
 var is_mixing = false
 var is_prepping = false
+var can_cook = true
 var cut_amount = 0
 var mix_rotation = 0.0
 var prep_x = 0
 @onready var left_mouse_x = get_viewport_rect().size.x * 0.3
 @onready var right_mouse_x = get_viewport_rect().size.x * 0.7 
+signal finished_step
 
 var prep_amount = 0 #this will be how many times the mouse is moved past the right marker
 var hit_left = false
@@ -18,18 +20,18 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		player = body
 		
-		if self.is_in_group("CuttingBoard"):
+		if self.is_in_group("CuttingBoard") and can_cook:
 			start_cutting()
-		elif self.is_in_group("MixingBowl"):
+		elif self.is_in_group("MixingBowl") and can_cook:
 			start_mixing()
-		elif self.is_in_group("Prep"):
+		elif self.is_in_group("Prep") and can_cook:
 			start_prep()
-		elif self.is_in_group("StorageSpot"):
+		elif self.is_in_group("StorageSpot") and can_cook:
 			start_storage()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		print("done")
+		can_cook = true
 
 func _input(event: InputEvent) -> void:
 	if is_cutting and event is InputEventMouseButton and event.pressed:
@@ -79,3 +81,5 @@ func reset_states() -> void:
 	is_mixing = false
 	is_prepping = false
 	player.setMoving(true) 
+	can_cook = false
+	finished_step.emit()
