@@ -22,7 +22,7 @@ func _attacked(attack_pos, damage) -> void:
 	HEALTH -= damage
 	move_and_slide()
 	if HEALTH <= 0:
-		var honey_drop = preload("res://BasicHoney.tscn").instantiate()
+		var honey_drop = preload("res://Art/HoneySlime/BasicHoney.tscn").instantiate()
 		get_parent().add_child(honey_drop) 
 		honey_drop.global_position = global_position 
 		queue_free()

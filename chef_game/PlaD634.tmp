@@ -127,7 +127,6 @@ theme_override_font_sizes/font_size = 34
 
 [node name="ItemList" type="ItemList" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

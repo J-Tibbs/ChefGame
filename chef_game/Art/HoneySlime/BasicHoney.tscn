@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dumdl3sfr7wu7"]
 
-[ext_resource type="Script" path="res://basic_honey.gd" id="1_606fg"]
+[ext_resource type="Script" path="res://Art/HoneySlime/basic_honey.gd" id="1_606fg"]
 [ext_resource type="Texture2D" uid="uid://bwvnnj25vn805" path="res://Art/HoneySlime/smallHoney.png" id="1_r40nf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_axiyw"]

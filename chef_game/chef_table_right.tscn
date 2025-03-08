@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://7th10lud5sha"]
+[gd_scene load_steps=6 format=3 uid="uid://7th10lud5sha"]
 
 [ext_resource type="Texture2D" uid="uid://del7i8fj5y2aw" path="res://Art/ChefTableRight.png" id="1_sw23r"]
 [ext_resource type="Script" path="res://ChefSpot.gd" id="2_hho71"]
@@ -6,8 +6,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2mu2n"]
 size = Vector2(180, 38)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6e5nt"]
+radius = 11.3139
+height = 39.5986
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3787w"]
-radius = 7.07118
+radius = 11.3139
 height = 39.5986
 
 [node name="BasicTable" type="StaticBody2D"]
@@ -25,20 +29,21 @@ position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_2mu2n")
 
 [node name="Preparation" type="Area2D" parent="." groups=["Prep"]]
+position = Vector2(-50.9125, -25.4562)
 collision_layer = 0
 script = ExtResource("2_hho71")
 
 [node name="Left Side" type="CollisionShape2D" parent="Preparation"]
-position = Vector2(-49.4983, -25.4563)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_3787w")
+shape = SubResource("CapsuleShape2D_6e5nt")
 
 [node name="Storage" type="Area2D" parent="." groups=["StorageSpot"]]
+position = Vector2(49.4982, -25.4562)
 collision_layer = 0
 script = ExtResource("2_hho71")
 
 [node name="Right Side" type="CollisionShape2D" parent="Storage"]
-position = Vector2(49.4982, -25.4563)
+position = Vector2(-3.8147e-05, -6.67572e-05)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_3787w")
 

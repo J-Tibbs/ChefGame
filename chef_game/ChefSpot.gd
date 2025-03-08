@@ -4,12 +4,12 @@ var is_cutting = false
 var is_mixing = false
 var is_prepping = false
 var can_cook = true
+var is_cooking = false
 var cut_amount = 0
 var mix_rotation = 0.0
 var prep_x = 0
 @onready var left_mouse_x = get_viewport_rect().size.x * 0.3
 @onready var right_mouse_x = get_viewport_rect().size.x * 0.7 
-signal finished_step
 
 var prep_amount = 0 #this will be how many times the mouse is moved past the right marker
 var hit_left = false
@@ -18,21 +18,23 @@ var hit_left = false
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		player = body
-		
-		if self.is_in_group("CuttingBoard") and can_cook:
+		is_cooking = true
+		player = body		
+		if self.is_in_group("CuttingBoard") and can_cook and player.get_current_step() == "cut":
+			player.position = self.get_child(0).global_position
 			start_cutting()
-		elif self.is_in_group("MixingBowl") and can_cook:
+		elif self.is_in_group("MixingBowl") and can_cook and player.get_current_step() == "mix":
+			player.position = self.get_child(0).global_position
 			start_mixing()
-		elif self.is_in_group("Prep") and can_cook:
+		elif self.is_in_group("Prep") and can_cook and player.get_current_step() == "prep":
+			player.position = self.get_child(0).global_position
 			start_prep()
-		elif self.is_in_group("StorageSpot") and can_cook:
+		elif self.is_in_group("StorageSpot"):
 			start_storage()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		can_cook = true
-
 func _input(event: InputEvent) -> void:
 	if is_cutting and event is InputEventMouseButton and event.pressed:
 		cut_amount += 1
@@ -54,7 +56,7 @@ func _input(event: InputEvent) -> void:
 		if prep_x >= right_mouse_x and hit_left:
 			hit_left = false
 			prep_amount += 1
-			
+		print(prep_amount)
 		if prep_amount >= 3:
 			reset_states()
 
@@ -81,5 +83,6 @@ func reset_states() -> void:
 	is_mixing = false
 	is_prepping = false
 	player.setMoving(true) 
-	can_cook = false
-	finished_step.emit()
+	can_cook = true
+	is_cooking = false
+	player.end_current_step()

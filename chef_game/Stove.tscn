@@ -1,6 +1,21 @@
-[gd_scene load_steps=6 format=3 uid="uid://cxqxr8kypferx"]
+[gd_scene load_steps=8 format=3 uid="uid://cxqxr8kypferx"]
 
 [ext_resource type="Script" path="res://kitchenApplliance.gd" id="1_unla8"]
+[ext_resource type="Texture2D" uid="uid://cknjag8rvgwpc" path="res://Art/Oven1.png" id="2_x88jn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dm0s2"]
+bg_color = Color(0.374925, 0.35644, 0.331805, 0.533333)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lq8fj"]
+bg_color = Color(0.0104158, 0.71046, 1.15514e-06, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5eb7n"]
 radius = 5.0
@@ -9,52 +24,30 @@ height = 22.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odfwi"]
 size = Vector2(30, 28)
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_5adhw"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0uirx"]
 size = Vector2(30, 28)
 
 [node name="Area2D" type="Area2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 visible = false
-
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -579.0
-offset_top = -329.0
-offset_right = 577.0
-offset_bottom = 324.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-color = Color(0.815686, 0.815686, 0.815686, 0.301961)
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -227.0
-offset_right = 151.0
-offset_bottom = 79.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
+texture_filter = 1
+offset_left = -24.0
+offset_top = -25.0
+offset_right = 24.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_dm0s2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lq8fj")
+max_value = 3.0
+show_percentage = false
 
 [node name="InteractSpot" type="Area2D" parent="." groups=["Oven"]]
 collision_layer = 16
 collision_mask = 3
 script = ExtResource("1_unla8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractSpot"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractSpot" groups=["Oven"]]
 position = Vector2(0, 23)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5eb7n")
@@ -63,9 +56,10 @@ shape = SubResource("CapsuleShape2D_5eb7n")
 shape = SubResource("RectangleShape2D_odfwi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(9.53674e-07, 7.15256e-07)
-scale = Vector2(30, 28)
-texture = SubResource("CanvasTexture_5adhw")
+texture_filter = 1
+position = Vector2(0, 2.6875)
+scale = Vector2(0.606027, 0.632812)
+texture = ExtResource("2_x88jn")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 16
@@ -74,5 +68,11 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_0uirx")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
 [connection signal="body_entered" from="InteractSpot" to="InteractSpot" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractSpot" to="InteractSpot" method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="InteractSpot" method="_on_timer_timeout"]

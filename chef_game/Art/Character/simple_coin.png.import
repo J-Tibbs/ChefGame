@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d24rea38bmqgg"
-path="res://.godot/imported/Oven.png-91045b12ab8a7d685c77f0665b876fac.ctex"
+uid="uid://drbwl0x245t07"
+path="res://.godot/imported/simple_coin.png-98598ae1fdb88a8308c95b755a1b06fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Oven.png"
-dest_files=["res://.godot/imported/Oven.png-91045b12ab8a7d685c77f0665b876fac.ctex"]
+source_file="res://Art/Character/simple_coin.png"
+dest_files=["res://.godot/imported/simple_coin.png-98598ae1fdb88a8308c95b755a1b06fa.ctex"]
 
 [params]
 

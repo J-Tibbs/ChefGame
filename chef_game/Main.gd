@@ -1,10 +1,12 @@
 extends Node2D
-@onready var path_follow = $Path2D/PathFollow2D
+@onready var path_follow = $Forest1Detect/Path2D/PathFollow2D
 var canSpawn = false
+var forest_one_enemies = ["res://Art/HoneySlime/HoneySlime.tscn", "res://Art/HoneySlime/BasicHoney.tscn"]
 func ready():
 	pass
 func spawn_mob():
-	var honey_slime = preload("res://HoneySlime.tscn").instantiate()
+	var current_enemy = forest_one_enemies.pick_random()
+	var honey_slime = load(current_enemy).instantiate()
 	path_follow.progress_ratio = randf()
 	honey_slime.global_position = path_follow.global_position
 	add_child(honey_slime)

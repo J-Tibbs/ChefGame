@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bh1t6g24p5aon"]
+
+[ext_resource type="Script" path="res://pay_wall_chec.gd" id="1_oaexw"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rovtc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci2v8"]
+size = Vector2(118, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cet15"]
+size = Vector2(34, 17)
+
+[node name="Paywall" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.8147e-06, 9.53674e-07)
+scale = Vector2(118, 36)
+texture = SubResource("CanvasTexture_rovtc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ci2v8")
+
+[node name="Area2D" type="Area2D" parent="." groups=["forest_one"]]
+collision_layer = 0
+script = ExtResource("1_oaexw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 36.5)
+shape = SubResource("RectangleShape2D_cet15")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
