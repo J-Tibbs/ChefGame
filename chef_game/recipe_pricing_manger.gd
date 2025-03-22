@@ -1,14 +1,19 @@
 extends Node
 
 
-func receive_meal(meal): #this will also take in bonuses from ingredients
+func receive_meal(ingred_list, meal): #this will also take in bonuses from ingredients
 	var current_meal = meal
-	if len(meal[1]) == 3:
-		return	10
-	if len(meal[1]) == 6:
-		return	20
-	if len(meal[1]) == 9:
-		return	30
-
-func return_coin(amount):
-	return amount
+	var total_bonus = 0
+	var base = 0
+	for bonus in ingred_list:
+		total_bonus += bonus
+	if meal == 3:
+		base = 10
+	elif meal == 5:
+		base = 20
+	elif meal == 7:
+		base = 30
+	print(base)
+	print(total_bonus)
+	print(base + (base * total_bonus))
+	return base + (base * total_bonus)

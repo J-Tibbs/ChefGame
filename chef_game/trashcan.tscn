@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://c46odgn3p8xw"]
+
+[ext_resource type="Script" path="res://trashcan.gd" id="1_4qv0n"]
+[ext_resource type="Texture2D" uid="uid://bj74hvnutc681" path="res://Art/trashcan.png" id="1_habx2"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4qmcx"]
+radius = 7.0
+height = 50.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ca7m"]
+radius = 6.83329
+height = 45.8333
+
+[node name="Node2D" type="Area2D"]
+position = Vector2(0, -12)
+scale = Vector2(0.48, 0.48)
+collision_layer = 16
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3.8147e-06, 3.8147e-06)
+scale = Vector2(1.67188, 1.67188)
+texture = ExtResource("1_habx2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 43)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4qmcx")
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("1_4qv0n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 64)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1ca7m")
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

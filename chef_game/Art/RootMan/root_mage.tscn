@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmdlci4kpp1br"]
+
+[ext_resource type="Texture2D" uid="uid://dspa7t3hxik0p" path="res://Art/RootMan/mage.png" id="1_20xob"]
+[ext_resource type="Script" path="res://Art/RootMan/root_mage.gd" id="1_wryhj"]
+[ext_resource type="Texture2D" uid="uid://duxmu7cl7i1s0" path="res://Art/RootMan/circle.png" id="3_xi8ki"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_txel3"]
+radius = 9.26306
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g0oqh"]
+radius = 47.1319
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pv1pb"]
+radius = 171.902
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(1.68, 1.68)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_wryhj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.41283e-12, -3)
+rotation = 1.5708
+scale = Vector2(-3.13817, 3.13415)
+shape = SubResource("CircleShape2D_txel3")
+
+[node name="Mage" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(1.10625, 1.10625)
+texture = ExtResource("1_20xob")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="InitialRun" type="Area2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InitialRun"]
+position = Vector2(5.22959e-12, -1)
+rotation = 1.5708
+scale = Vector2(1.80395, 1.81052)
+shape = SubResource("CircleShape2D_g0oqh")
+
+[node name="RunRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RunRange"]
+position = Vector2(5.22959e-12, -1)
+rotation = 1.5708
+scale = Vector2(1.80395, 1.81052)
+shape = SubResource("CircleShape2D_pv1pb")
+
+[node name="FireTime" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[node name="Cooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="Circle" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+texture = ExtResource("3_xi8ki")
+
+[connection signal="body_entered" from="InitialRun" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="InitialRun" to="." method="_on_initial_run_body_entered"]
+[connection signal="body_exited" from="InitialRun" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_exited" from="RunRange" to="." method="_on_run_range_body_exited"]
+[connection signal="timeout" from="FireTime" to="." method="_on_fire_time_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

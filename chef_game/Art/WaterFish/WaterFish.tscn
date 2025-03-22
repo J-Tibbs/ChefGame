@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1c3yw37gnwwu"]
+
+[ext_resource type="Texture2D" uid="uid://b6du0gb2s7mrh" path="res://Art/WaterFish/fishHead.png" id="1_bmmj6"]
+[ext_resource type="Script" path="res://Art/WaterFish/water_fish.gd" id="1_cqya3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hhrdk"]
+radius = 13.9773
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ko6kb"]
+radius = 182.965
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(1.8748, 1.8748)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_cqya3")
+
+[node name="FishHead" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.4508, 1.4508)
+texture = ExtResource("1_bmmj6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.44592)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_hhrdk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="Mist" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mist"]
+shape = SubResource("CircleShape2D_ko6kb")
+
+[connection signal="body_entered" from="Mist" to="." method="_on_mist_body_entered"]
+[connection signal="body_exited" from="Mist" to="." method="_on_mist_body_exited"]

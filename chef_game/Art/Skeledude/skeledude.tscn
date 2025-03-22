@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://bi3lp27o83nle"]
+
+[ext_resource type="Script" path="res://Art/Skeledude/skeledude.gd" id="1_d2uud"]
+[ext_resource type="Texture2D" uid="uid://blft25rphuke2" path="res://Art/Skeledude/skeledude.png" id="1_h4wy0"]
+[ext_resource type="Texture2D" uid="uid://dh401fopftqra" path="res://Art/Skeledude/bone_attack.png" id="3_n4g3j"]
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minotaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ue47m"]
+radius = 39.3172
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4ouqv"]
+radius = 13.8741
+height = 38.5765
+
+[node name="Skeledude" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(3.20251, 3.20251)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_d2uud")
+
+[node name="Skeledude" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(1.10625, 1.10625)
+texture = ExtResource("1_h4wy0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemies"]]
+unique_name_in_owner = true
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.52469e-12, -1.90735e-06)
+rotation = 1.5708
+scale = Vector2(1.95999, 1.97332)
+shape = SubResource("CircleShape2D_ue47m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture_filter = 1
+scale = Vector2(1.07572, 1.07572)
+texture = ExtResource("3_n4g3j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.92308)
+scale = Vector2(1.32351, 2.2)
+shape = SubResource("CapsuleShape2D_4ouqv")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true
+
+[node name="GotStuck" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 3.0
+one_shot = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GotStuck" to="." method="_on_got_stuck_timeout"]

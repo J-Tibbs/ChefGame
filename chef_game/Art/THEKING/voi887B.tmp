@@ -1,0 +1,126 @@
+[gd_scene load_steps=16 format=3 uid="uid://cj2x1abjpactj"]
+
+[ext_resource type="Script" path="res://Art/THEKING/void_worm.gd" id="1_8ih0f"]
+[ext_resource type="Texture2D" uid="uid://f5fyix5m051h" path="res://Art/THEKING/void_worm1.png" id="1_qhmc8"]
+[ext_resource type="Texture2D" uid="uid://gg0ywmpyvqhq" path="res://Art/THEKING/void_worm2.png" id="3_4b2kg"]
+[ext_resource type="Texture2D" uid="uid://bpp8i826prbb6" path="res://Art/THEKING/void_worm3.png" id="4_nri2l"]
+[ext_resource type="Texture2D" uid="uid://cgjhjpqbpmnt3" path="res://Art/THEKING/void_worm4.png" id="5_08gbq"]
+[ext_resource type="Texture2D" uid="uid://crurl48eofj66" path="res://Art/THEKING/void_worm5.png" id="6_i8i36"]
+[ext_resource type="Texture2D" uid="uid://s3l74qnoj7c2" path="res://Art/THEKING/void_worm6.png" id="7_pbynl"]
+[ext_resource type="Texture2D" uid="uid://crimanbk7nrbi" path="res://Art/THEKING/void_worm7.png" id="8_lmy3k"]
+[ext_resource type="Texture2D" uid="uid://qi7o4r3hpqng" path="res://Art/THEKING/void_worm8.png" id="9_oipus"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4pu3y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qhmc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4b2kg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nri2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_08gbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_i8i36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pbynl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lmy3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_oipus")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ha3tm"]
+radius = 109.859
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8hwv"]
+bg_color = Color(0.366595, 0.366595, 0.366595, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4gxc"]
+bg_color = Color(0.6, 0, 0.678431, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8oyv2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12vxt"]
+bg_color = Color(0.873805, 0.768949, 7.70092e-07, 1)
+
+[node name="Node2D" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 8
+scale = Vector2(1.32, 1.32)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_8ih0f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_4pu3y")
+frame_progress = 0.0995461
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.51515, 3.0303)
+shape = SubResource("CircleShape2D_ha3tm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="BossHealth" type="ProgressBar" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1.0
+offset_top = 58.0
+offset_right = 3.0
+offset_bottom = 85.0
+grow_horizontal = 2
+scale = Vector2(235.88, 1.16128)
+pivot_offset = Vector2(1.81115, 16)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_g8hwv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e4gxc")
+max_value = 150.0
+value = 150.0
+show_percentage = false
+
+[node name="AttackTimer" type="ProgressBar" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 6.10352e-05
+offset_top = 75.0
+offset_right = 4.00006
+offset_bottom = 102.0
+grow_horizontal = 2
+scale = Vector2(71.0288, 0.319999)
+pivot_offset = Vector2(2, 16)
+theme_override_styles/background = SubResource("StyleBoxFlat_8oyv2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_12vxt")
+max_value = 5.0
+value = 5.0
+show_percentage = false
+
+[node name="FirePoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+
+[node name="UntilAttack" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="UntilAttack" to="." method="_on_until_attack_timeout"]

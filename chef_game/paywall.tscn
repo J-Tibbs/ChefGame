@@ -1,8 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bh1t6g24p5aon"]
 
+[ext_resource type="Texture2D" uid="uid://dlkbfuo1ab48t" path="res://Art/QuickWall.png" id="1_ipf3w"]
 [ext_resource type="Script" path="res://pay_wall_chec.gd" id="1_oaexw"]
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_rovtc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci2v8"]
 size = Vector2(118, 36)
@@ -14,15 +13,29 @@ size = Vector2(34, 17)
 collision_layer = 16
 collision_mask = 3
 
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+z_index = 1
+texture_filter = 1
+offset_left = -59.0
+offset_top = -18.0
+offset_right = 59.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(3.8147e-06, 9.53674e-07)
-scale = Vector2(118, 36)
-texture = SubResource("CanvasTexture_rovtc")
+texture_filter = 1
+position = Vector2(0.250223, 1.90735e-06)
+scale = Vector2(0.630322, 0.514286)
+texture = ExtResource("1_ipf3w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ci2v8")
 
-[node name="Area2D" type="Area2D" parent="." groups=["forest_one"]]
+[node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 script = ExtResource("1_oaexw")
 

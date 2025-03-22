@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://xqppjni8mrk2"]
+
+[ext_resource type="Script" path="res://Art/Whisps/whisps.gd" id="1_8r0c2"]
+[ext_resource type="Texture2D" uid="uid://40hdg3hfss6g" path="res://Art/Whisps/whisps.png" id="1_yvric"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4r7uf"]
+radius = 18.4105
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minotaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a4yxd"]
+radius = 73.0882
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(1.56, 1.56)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_8r0c2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.29923e-11, 1.90735e-06)
+rotation = 1.5708
+scale = Vector2(1.32351, 1.40513)
+shape = SubResource("CircleShape2D_4r7uf")
+
+[node name="Whisps" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(0.644711, 0.644711)
+texture = ExtResource("1_yvric")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_a4yxd")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

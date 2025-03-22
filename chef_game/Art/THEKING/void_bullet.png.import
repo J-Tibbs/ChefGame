@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwvnnj25vn805"
-path="res://.godot/imported/smallHoney.png-8e87be8a4fa0f18ae1bc91246c0761f7.ctex"
+uid="uid://7fsvxakvr007"
+path="res://.godot/imported/void_bullet.png-368e13ae03397b99f5106623d33968f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/HoneySlime/smallHoney.png"
-dest_files=["res://.godot/imported/smallHoney.png-8e87be8a4fa0f18ae1bc91246c0761f7.ctex"]
+source_file="res://Art/THEKING/void_bullet.png"
+dest_files=["res://.godot/imported/void_bullet.png-368e13ae03397b99f5106623d33968f9.ctex"]
 
 [params]
 

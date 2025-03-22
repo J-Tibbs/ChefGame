@@ -1,0 +1,128 @@
+[gd_scene load_steps=15 format=3 uid="uid://boyu1ce5gggd2"]
+
+[ext_resource type="Script" path="res://Art/Minotaur/minotaur.gd" id="1_j0jnv"]
+[ext_resource type="Texture2D" uid="uid://cgeccwlw6j0x7" path="res://Art/Minotaur/minotaur.png" id="2_grx0j"]
+[ext_resource type="Texture2D" uid="uid://yo7mln30ycjv" path="res://Art/Character/Attack/Further Attack/FarAttack1.png" id="3_qnxe6"]
+[ext_resource type="Texture2D" uid="uid://bu4bexwdomq4f" path="res://Art/Character/Attack/Further Attack/FarAttack2.png" id="4_dg3ft"]
+[ext_resource type="Texture2D" uid="uid://bo1g6tfmkqqux" path="res://Art/Character/Attack/Further Attack/FarAttack3.png" id="5_i74wo"]
+[ext_resource type="Texture2D" uid="uid://cry3y1ihnq3w" path="res://Art/Character/Attack/Further Attack/FarAttack4.png" id="6_8ykqu"]
+[ext_resource type="Texture2D" uid="uid://dc6t4awrbgxm4" path="res://Art/Character/Attack/Further Attack/FarAttack5.png" id="7_2vt0t"]
+[ext_resource type="Texture2D" uid="uid://dxpbvda0lmxf5" path="res://Art/Character/Attack/Further Attack/FarAttack6.png" id="8_qr0v4"]
+[ext_resource type="Texture2D" uid="uid://d3rjkusf8x7rv" path="res://Art/Character/Attack/Further Attack/FarAttack7.png" id="9_0oqmi"]
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minotaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q8h0d"]
+radius = 11.3335
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yihbc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_qnxe6")
+}],
+"loop": false,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.2,
+"texture": ExtResource("4_dg3ft")
+}, {
+"duration": 0.4,
+"texture": ExtResource("5_i74wo")
+}, {
+"duration": 0.4,
+"texture": ExtResource("6_8ykqu")
+}, {
+"duration": 0.3,
+"texture": ExtResource("7_2vt0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_qr0v4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0oqmi")
+}],
+"loop": false,
+"name": &"Swing",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 4
+scale = Vector2(2.36, 2.36)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_j0jnv")
+
+[node name="Minotaur" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+rotation = 3.14159
+scale = Vector2(1.46625, 1.46625)
+texture = ExtResource("2_grx0j")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="Swing" type="Area2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Swing"]
+position = Vector2(0, 36)
+polygon = PackedVector2Array(19.0678, -21.1695, 34, -35, 40.2543, -34.7288, 43.2204, -2.10167, 21.1865, 15.695, -22.8814, 15.695, -44.9153, -4.64404, -43.6441, -35.5763, -34, -34, -18.6441, -20.7458)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.54744e-13, 2)
+rotation = 1.5708
+scale = Vector2(1.32351, 2.2)
+shape = SubResource("CapsuleShape2D_q8h0d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(0, 41)
+sprite_frames = SubResource("SpriteFrames_yihbc")
+animation = &"Idle"
+
+[node name="AttackTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="CooldownTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[connection signal="body_entered" from="Swing" to="." method="_on_swing_body_entered"]
+[connection signal="body_entered" from="Swing" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Swing" to="." method="_on_swing_body_exited"]
+[connection signal="body_exited" from="Swing" to="." method="_on_area_2d_body_exited"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

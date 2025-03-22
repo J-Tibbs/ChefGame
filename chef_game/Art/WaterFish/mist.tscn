@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://f8eeq8w27frn"]
+
+[ext_resource type="Script" path="res://Art/WaterFish/mist.gd" id="1_e4i37"]
+[ext_resource type="Texture2D" uid="uid://ci6gh8lcnote0" path="res://Art/WaterFish/mist.png" id="1_gd2cc"]
+
+[node name="Node2D" type="Node2D"]
+z_index = 6
+scale = Vector2(3.4, 3.4)
+script = ExtResource("1_e4i37")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3.8147e-06, 3.8147e-06)
+scale = Vector2(1.4625, 1.4625)
+texture = ExtResource("1_gd2cc")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://pu5b025n5oki"]
+
+[ext_resource type="Texture2D" uid="uid://dhxeescmnymn7" path="res://Art/RootMan/roots.png" id="1_fslg4"]
+[ext_resource type="Script" path="res://Art/RootMan/root.gd" id="1_my4wu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ixkrn"]
+radius = 24.0208
+
+[node name="Node2D" type="Area2D"]
+script = ExtResource("1_my4wu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("CircleShape2D_ixkrn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_fslg4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

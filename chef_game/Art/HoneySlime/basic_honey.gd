@@ -13,5 +13,9 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		body.get_ingredient("Honey")
+		body.get_ingredient("smallHoney")
 		queue_free()
+
+
+func _on_timer_timeout() -> void:
+	queue_free()

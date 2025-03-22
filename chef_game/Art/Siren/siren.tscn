@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://6lnjgu56et8b"]
+
+[ext_resource type="Script" path="res://Art/Siren/siren.gd" id="1_k7ha3"]
+[ext_resource type="Texture2D" uid="uid://dsb4vswahnsre" path="res://Art/Siren/siren.png" id="1_m0jr4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uir6j"]
+radius = 32.0624
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q4u12"]
+radius = 32.0
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(2.0748, 2.0748)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_k7ha3")
+
+[node name="Veggie shooter" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(1.10625, 1.10625)
+texture = ExtResource("1_m0jr4")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." groups=["Enemies"]]
+position = Vector2(-11, 1)
+collision_layer = 0
+collision_mask = 0
+mass = 0.001
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(14, 8)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_uir6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 9)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_q4u12")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 42)
+
+[node name="Fire" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 6.0
+
+[connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
+[connection signal="timeout" from="Fire" to="." method="_on_timer_timeout"]

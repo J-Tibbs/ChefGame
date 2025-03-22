@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdlv2cvn6l71o"]
+
+[ext_resource type="Script" path="res://Art/Infected/infected.gd" id="1_bej4n"]
+[ext_resource type="Texture2D" uid="uid://c88hwfsub5vjq" path="res://Art/Infected/infected1.png" id="2_5uaqr"]
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minotaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_83qhu"]
+height = 28.9575
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(2.08, 2.08)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_bej4n")
+
+[node name="Host" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(1.10625, 1.10625)
+texture = ExtResource("2_5uaqr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 44.2308)
+polygon = PackedVector2Array(0, 0, -9.61539, -3.84615, -11.5385, -6.41026, -11.5385, 2.5641, -7.05128, 3.20513, 0, 3.84615, 7.05128, 3.20513, 11.5385, 2.5641, 11.5385, -6.41026, 7.05128, -1.92308)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 25)
+scale = Vector2(1.32351, 1.32821)
+shape = SubResource("CapsuleShape2D_83qhu")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

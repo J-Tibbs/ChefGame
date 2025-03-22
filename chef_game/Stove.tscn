@@ -56,6 +56,7 @@ shape = SubResource("CapsuleShape2D_5eb7n")
 shape = SubResource("RectangleShape2D_odfwi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
 position = Vector2(0, 2.6875)
 scale = Vector2(0.606027, 0.632812)

@@ -18,19 +18,32 @@ var hit_left = false
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
-		is_cooking = true
-		player = body		
-		if self.is_in_group("CuttingBoard") and can_cook and player.get_current_step() == "cut":
+		player = body
+		var step_data = player.get_current_step()
+		if step_data == null:
+			return
+		
+		var required_action = step_data[0]
+		var required_type = step_data[1]
+
+		var selected_type = ""
+		if player.ingredients.has(player.currentIngredient):
+			selected_type = player.ingredients[player.currentIngredient][3]
+
+		if selected_type != required_type:
+			print("Wrong ingredient! This step requires a " + required_type)
+			return  # Prevents starting the wrong step
+		
+		# Start the correct step
+		if self.is_in_group("CuttingBoard") and required_action == "cut":
 			player.position = self.get_child(0).global_position
 			start_cutting()
-		elif self.is_in_group("MixingBowl") and can_cook and player.get_current_step() == "mix":
+		elif self.is_in_group("MixingBowl") and required_action == "mix":
 			player.position = self.get_child(0).global_position
 			start_mixing()
-		elif self.is_in_group("Prep") and can_cook and player.get_current_step() == "prep":
+		elif self.is_in_group("Prep") and required_action == "prep":
 			player.position = self.get_child(0).global_position
 			start_prep()
-		elif self.is_in_group("StorageSpot"):
-			start_storage()
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
@@ -79,6 +92,7 @@ func start_storage() -> void:
 	print("Storing food") 
 
 func reset_states() -> void:
+	player.lock_in_ingred()
 	is_cutting = false
 	is_mixing = false
 	is_prepping = false

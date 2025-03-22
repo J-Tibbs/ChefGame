@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://do2a6dt210a6a"]
+
+[ext_resource type="Script" path="res://bullet.gd" id="1_w0vrc"]
+[ext_resource type="Texture2D" uid="uid://blmek11uh56el" path="res://Art/MushroomBloke/toxinShot.png" id="2_xoflo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dvd3x"]
+radius = 13.6801
+
+[node name="Area2D" type="Area2D"]
+top_level = true
+rotation = -1.57079
+scale = Vector2(1.64112, 1.64112)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_w0vrc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.19209e-07, 0)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_xoflo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.38419e-07, -5.96046e-08)
+shape = SubResource("CircleShape2D_dvd3x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

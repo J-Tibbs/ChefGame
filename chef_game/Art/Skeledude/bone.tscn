@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://34uk65ifueep"]
+
+[ext_resource type="Script" path="res://Art/Skeledude/bone.gd" id="1_ddoky"]
+[ext_resource type="Texture2D" uid="uid://wso45b5575ny" path="res://Art/FoodIcons/Bone.png" id="2_6ayoi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axiyw"]
+radius = 12.0416
+
+[node name="Area2D" type="Area2D" groups=["MobDrop", "Veggie", "bone"]]
+z_index = -1
+scale = Vector2(2.8, 2.8)
+collision_layer = 8
+script = ExtResource("1_ddoky")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["MobDrop"]]
+shape = SubResource("CircleShape2D_axiyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["MobDrop"]]
+texture_filter = 1
+position = Vector2(5.36442e-07, -7.15256e-07)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("2_6ayoi")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

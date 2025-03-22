@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://6cyat8mpqi3d"]
+
+[ext_resource type="Script" path="res://recipe_pricing_manger.gd" id="1_8461u"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_8461u")

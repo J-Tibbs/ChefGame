@@ -114,15 +114,28 @@ offset_bottom = -39.0
 grow_vertical = 0
 theme_override_styles/background = SubResource("StyleBoxFlat_wq1gd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_ychvp")
-value = 100.0
+max_value = 200.0
+value = 200.0
 show_percentage = false
 
 [node name="Current Step" type="Label" parent="CanvasLayer"]
 unique_name_in_owner = true
+texture_filter = 1
 offset_left = 29.0
-offset_top = 31.0
+offset_top = 51.0
 offset_right = 190.0
-offset_bottom = 84.0
+offset_bottom = 104.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 34
+
+[node name="Recipe" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+texture_filter = 1
+offset_left = 29.0
+offset_top = 6.0
+offset_right = 294.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 34
 
 [node name="ItemList" type="ItemList" parent="CanvasLayer"]
@@ -151,4 +164,23 @@ position = Vector2(0, 5)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_pl05c")
 
+[node name="IngredientSpot" type="Marker2D" parent="."]
+position = Vector2(0, -9)
+
+[node name="Sprite2D" type="Sprite2D" parent="IngredientSpot"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(2.80604, 2.80604)
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 9)
+polygon = PackedVector2Array(0, -9, -202, 425, -138, 451, 2, 456, 158, 448, 232, 415)
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

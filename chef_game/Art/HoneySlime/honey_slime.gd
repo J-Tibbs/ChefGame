@@ -5,7 +5,8 @@ extends CharacterBody2D
 
 var SPEED = 100.0
 var HEALTH = 10.0
-var DAMAGE = .5
+var DAMAGE = .2
+var damage_player = false
 
 func _ready() -> void:
 	add_to_group("Enemies")
@@ -15,6 +16,9 @@ func _physics_process(delta):
 	velocity = SPEED * direction
 
 	move_and_slide()
+	if damage_player:
+		player.player_hurt(DAMAGE) 
+
 
 func _attacked(attack_pos, damage) -> void:
 	var knockback = global_position.direction_to(attack_pos)
@@ -27,9 +31,23 @@ func _attacked(attack_pos, damage) -> void:
 		honey_drop.global_position = global_position 
 		queue_free()
 func _getDamage() -> float:
-	
 	return DAMAGE
 	
 func despawn():
-	print("Being despawned")
 	queue_free()
+
+
+	
+
+	
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+
+		damage_player = true
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		damage_player = false

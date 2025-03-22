@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://xofc27qijd30"]
+
+[ext_resource type="Script" path="res://Art/MuckMan/muckettes.gd" id="1_iemuu"]
+[ext_resource type="Texture2D" uid="uid://dn6l4ge7d7ec1" path="res://Art/MuckMan/muck_man.png" id="2_0nork"]
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minotaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_chg40"]
+radius = 11.6241
+height = 24.4755
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(1.84, 1.84)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_iemuu")
+
+[node name="MuckMan" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(1.10625, 1.10625)
+texture = ExtResource("2_0nork")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(5.12821, 8.33333)
+scale = Vector2(1, 1.20139)
+polygon = PackedVector2Array(-8.97436, -2.66785, 0, -2.13428, 9.61539, -2.66785, 19.2308, -5.86927, 27.5641, -11.5385, 31.4103, 10.8974, 5.12821, 16.0256, -19.2308, 14.94, -31.4103, 1.92308, -33.3333, -8.53712, -26.2821, -12.2721, -23.0769, -7.46998, -17.3077, -4.80213)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.12821, -9.61539)
+rotation = 1.5708
+scale = Vector2(1.32351, 2.2)
+shape = SubResource("CapsuleShape2D_chg40")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

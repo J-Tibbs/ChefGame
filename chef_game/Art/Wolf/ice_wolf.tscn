@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://bin3ecjyhx1rd"]
+
+[ext_resource type="Script" path="res://Art/Wolf/ice_wolf.gd" id="1_08jse"]
+[ext_resource type="Texture2D" uid="uid://boxug3nyd4hf4" path="res://Art/Wolf/ice_wolf.png" id="2_7npkt"]
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Slime:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7vawg"]
+radius = 4.74192
+height = 17.8525
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(1.68, 1.68)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_08jse")
+
+[node name="Wolf" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(1.10625, 1.10625)
+texture = ExtResource("2_7npkt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1.78571)
+scale = Vector2(-3.13817, 3.13415)
+shape = SubResource("CapsuleShape2D_7vawg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 30.9524)
+polygon = PackedVector2Array(9.52381, -4.76191, 4.16667, -1.19048, -5.35714, -1.78572, -13.0952, -8.92857, -16.0714, -4.76191, -11.9048, 7.73809, 10.119, 7.14286, 18.4524, -9.52381, 13.0952, -8.92857)
+
+[node name="RunAway" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="RunAway" to="." method="_on_run_away_timeout"]

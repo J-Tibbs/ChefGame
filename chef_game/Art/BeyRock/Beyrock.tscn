@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://cst5t53j2k6c6"]
+
+[ext_resource type="Script" path="res://Art/BeyRock/beyrock.gd" id="1_4pf7w"]
+[ext_resource type="Texture2D" uid="uid://c3x4y83sfsnk4" path="res://Art/BeyRock/rockweed.png" id="2_va0rr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tidyd"]
+atlas = ExtResource("2_va0rr")
+region = Rect2(0, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnwln"]
+atlas = ExtResource("2_va0rr")
+region = Rect2(80, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kas2e"]
+atlas = ExtResource("2_va0rr")
+region = Rect2(160, 0, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc6to"]
+atlas = ExtResource("2_va0rr")
+region = Rect2(240, 0, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4mxni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tidyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnwln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kas2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc6to")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ch87w"]
+radius = 19.3735
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minotaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i87yi"]
+radius = 16.7233
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(1.56, 1.56)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_4pf7w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_4mxni")
+frame_progress = 0.317751
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.67362e-19, 0)
+rotation = 1.5708
+scale = Vector2(1.32351, 1.40513)
+shape = SubResource("CircleShape2D_ch87w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="Area2D" type="Area2D" parent="." groups=["Enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1.52469e-12, 0)
+rotation = 1.5708
+scale = Vector2(1.95999, 2.12717)
+shape = SubResource("CircleShape2D_i87yi")
+
+[node name="DirectionChange" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="DirectionChange" to="." method="_on_direction_change_timeout"]

@@ -1,12 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://dkkeaqc6d7l75"]
 
 [ext_resource type="Script" path="res://RecipeDesk.gd" id="1_jdoqc"]
+[ext_resource type="Texture2D" uid="uid://bws8c30ru5d28" path="res://Art/RecipeTable.png" id="2_aidvt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5eb7n"]
 radius = 3.0
 height = 22.0
-
-[sub_resource type="CanvasTexture" id="CanvasTexture_5adhw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vo6iu"]
 size = Vector2(48, 14)
@@ -25,9 +24,11 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_5eb7n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4.76837e-07, 7)
-scale = Vector2(47.6598, 14)
-texture = SubResource("CanvasTexture_5adhw")
+texture_filter = 1
+position = Vector2(0.0530142, 9.8361)
+rotation = -3.14159
+scale = Vector2(0.631698, 0.890509)
+texture = ExtResource("2_aidvt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)

@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://dffq85otcjmt"]
+
+[ext_resource type="Script" path="res://pause_menu.gd" id="1_rtt7t"]
+[ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_ilre0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hxkec"]
+shader = ExtResource("2_ilre0")
+shader_parameter/amount = 1.0
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rtt7t")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hxkec")
+layout_mode = 2
+offset_left = -718.0
+offset_top = -571.0
+offset_right = -575.0
+offset_bottom = -453.0
+scale = Vector2(22.52, 24.3967)
+color = Color(0.317647, 0.317647, 0.317647, 0.882353)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = -69.0
+offset_top = -59.0
+offset_right = 74.0
+offset_bottom = 59.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Resume"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

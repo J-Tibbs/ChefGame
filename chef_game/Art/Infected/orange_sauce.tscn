@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdupe8bac1b1x"]
+
+[ext_resource type="Texture2D" uid="uid://wo4yf20rn1pr" path="res://Art/FoodIcons/daOrangeSauce.png" id="1_iowjw"]
+[ext_resource type="Script" path="res://Art/Infected/orange_sauce.gd" id="1_pjiat"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axiyw"]
+radius = 12.0416
+
+[node name="Area2D" type="Area2D" groups=["MobDrop", "Sauce", "orange_sauce"]]
+z_index = -1
+scale = Vector2(2.8, 2.8)
+collision_layer = 8
+script = ExtResource("1_pjiat")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["MobDrop"]]
+shape = SubResource("CircleShape2D_axiyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["MobDrop"]]
+texture_filter = 1
+position = Vector2(5.36442e-07, -0.714286)
+scale = Vector2(1.67964, 1.67964)
+texture = ExtResource("1_iowjw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

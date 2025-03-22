@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://dd8ox625i5des"]
+
+[ext_resource type="Texture2D" uid="uid://ykt4w3jneyin" path="res://Art/StonePiercer/spooky.png" id="1_5vutl"]
+[ext_resource type="Script" path="res://Art/StonePiercer/stone_piercer.gd" id="1_y62vp"]
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Minotaur:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j2bxj"]
+radius = 17.4362
+height = 43.11
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+scale = Vector2(2.6, 2.6)
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_y62vp")
+
+[node name="StonePiercer" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1.90735e-06, -2.86102e-06)
+scale = Vector2(1.10625, 1.10625)
+texture = ExtResource("1_5vutl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.46154)
+scale = Vector2(1.32351, 1.30257)
+shape = SubResource("CapsuleShape2D_j2bxj")
+
+[node name="UntilDash" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 7.0
+one_shot = true
+autostart = true
+
+[node name="WindupTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(0, 32.6923)
+polygon = PackedVector2Array(0, -1.15385, -6.15385, -1.92308, -9.61539, -3.46154, -11.5385, -4.23077, -16.1538, -7.69231, -18.0769, -6.15385, -11.9231, 1.15385, -10, 3.07692, -5, 5.38462, 0, 5.38462, 10, 4.61539, 16.5385, -1.15385, 18.8462, -7.30769, 16.5385, -7.69231, 11.5385, -4.23077, 5.76923, -1.92308)
+
+[node name="UntilStuck" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="UntilDash" to="." method="_on_until_dash_timeout"]
+[connection signal="timeout" from="WindupTimer" to="." method="_on_windup_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="UntilStuck" to="." method="_on_until_stuck_timeout"]

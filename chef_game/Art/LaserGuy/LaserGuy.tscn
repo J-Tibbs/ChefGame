@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8sgcu37pnitj"]
+
+[ext_resource type="Texture2D" uid="uid://cv28rq6mbmfqm" path="res://Art/LaserGuy/glubasaur.png" id="1_2y8mk"]
+[ext_resource type="Script" path="res://Art/LaserGuy/laser_guy.gd" id="1_hqaer"]
+[ext_resource type="Texture2D" uid="uid://bage17mcug14p" path="res://Art/LaserGuy/laser.png" id="2_tsebc"]
+
+[sub_resource type="Animation" id="Animation_cebtf"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Boar:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_6egce"]
+resource_name = "Normal"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ftcw"]
+_data = {
+"Hurt": SubResource("Animation_cebtf"),
+"Normal": SubResource("Animation_6egce")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l38rb"]
+radius = 13.2675
+height = 34.88
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+collision_layer = 2
+collision_mask = 19
+motion_mode = 1
+script = ExtResource("1_hqaer")
+
+[node name="Boar" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-4.54747e-13, 28)
+scale = Vector2(2.14625, 2.14625)
+texture = ExtResource("1_2y8mk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4ftcw")
+}
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, 14)
+scale = Vector2(1.95968, 2.40826)
+shape = SubResource("CapsuleShape2D_l38rb")
+
+[node name="Aiming" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[node name="Cooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 6.0
+one_shot = true
+
+[node name="LaserAttack" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="laser" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 606)
+rotation = 1.5708
+scale = Vector2(1.72, 1)
+collision_layer = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="laser"]
+texture_filter = 1
+texture = ExtResource("2_tsebc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="laser"]
+position = Vector2(-319.767, 2.40803e-05)
+rotation = 3.14159
+scale = Vector2(4.8, -6)
+polygon = PackedVector2Array(0, 0, -5.45058, -3.83333, -128.27, -4.00002, -129.36, -2.16667, -129.36, 2.16666, -128.27, 3.99999, -5.57171, 4, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[connection signal="timeout" from="Aiming" to="." method="_on_aiming_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="LaserAttack" to="." method="_on_laser_attack_timeout"]
+[connection signal="timeout" from="LaserAttack" to="." method="_on_charge_up_timeout"]
+[connection signal="body_entered" from="laser" to="." method="_on_laser_body_entered"]
+[connection signal="body_exited" from="laser" to="." method="_on_laser_body_exited"]
