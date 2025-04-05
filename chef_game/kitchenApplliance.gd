@@ -29,7 +29,6 @@ func _process(delta: float) -> void:
 
 		# Validate ingredient type before starting the cooking process
 		if required_action == "cook" and selected_type != required_type:
-			print("Wrong ingredient! This step requires a " + required_type)
 			return  # Prevents cooking if wrong ingredient is selected
 		
 		# Proceed with cooking if the correct ingredient is selected
@@ -46,6 +45,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		if self.is_in_group("Fridge"):
 			update_fridge()
+			%Open.play()
 			%CanvasLayer.visible = true
 		elif self.is_in_group("Pantry"):
 			update_pantry()
@@ -64,6 +64,7 @@ func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		
 		if self.is_in_group("Fridge"):
+			%Close.play()
 			%CanvasLayer.visible = false
 
 		elif self.is_in_group("Pantry"):
@@ -79,12 +80,14 @@ func update_ui(amount):
 func cookin_da_food():
 	player.lock_in_ingred()
 	%Timer.start()
+	%Hum.play()
 	isCookin = true
 	
 		
 	
 func _on_timer_timeout() -> void:
 	player.end_current_step()
+	%Beep.play()
 	%ProgressBar.visible = false
 	isCookin = false
 	%Sprite2D.texture = preload("res://Art/Oven1.png")

@@ -13,7 +13,5 @@ func receive_meal(ingred_list, meal): #this will also take in bonuses from ingre
 		base = 20
 	elif meal == 7:
 		base = 30
-	print(base)
-	print(total_bonus)
-	print(base + (base * total_bonus))
+
 	return base + (base * total_bonus)

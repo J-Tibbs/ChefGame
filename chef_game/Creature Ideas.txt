@@ -9,53 +9,67 @@ ok im going to start with only 4 but if time add the ones marked with ********
 if time add boosts to enemies from environment or other monsters
 
 Forest 1 (Plant) / sauce =-=- 1.1 multiplier -=-=
-> Honey Slime (sauce) [x][x]
-> Veggie Shooter (veggie) [x][x]
-> Pig/boar enemy (meat) [x][x]
-> Plant Moth thing (veggie) [x][x]
+> Honey Slime (sauce) [x][x]  ()
+> Veggie Shooter (veggie) [x][x] J ()
+> Pig/boar enemy (meat) [x][x] ()
+> Plant Moth thing (veggie) [x][x] ()
 ************> Tortoise like caramellized butter idk (sauce) []
 
 Forest 2 (Sauce) / meat =-=- 2 multiplier -=-=
-> Ranged vine enemy, like a laser guy but idk how to make it vines (veg) [x][x]
-> Maybe a roots enemy, slows the player rather than hurts (sauce) [x][x]
-> Minotaur type enemy (meat) [x][x]
-> Walking watershroom (sauce) [x][x]
+> Ranged vine enemy, like a laser guy but idk how to make it vines (veg) [x][x] ()
+> Maybe a roots enemy, slows the player rather than hurts (sauce) [x][x] ()
+> Minotaur type enemy (meat) [x][x] ()
+> Walking watershroom (sauce) [x][x] ()
 *************> Big Fox enemy (meat) []
 
 Cave 1 (Meat) / veg =-=- 1.25 multiplier -=-=
-> Bat (meat) [x][x]
-> Ghost (sauce)[x][x]
-> Spider (meat) [x][x]
-> Bear thing/sloth cool (veg) [x][x]
+> Bat (meat) [x][x] J ()
+> Ghost (sauce)[x][x] J ()
+> Spider (meat) [x][x] ()
+> Bear thing/sloth cool (veg) [x][x] J ()
 **********************> Spinny flower thing (veg) []
 
 Cave 2 (Plant) / meat =-=- 2.3 multiplier -=-=
-> Bone thing (veg) [x][x]
-> Sirens - drops like, music sauce idk(sauce) [x][x]
-> Tumbleweed rock thing (veg) [x][x]
-> Cowardly wolf (meat) [x][x]
+> Bone thing (veg) [x][x] ()
+> Sirens - drops like, music sauce idk(sauce) [x][x]  ()
+> Tumbleweed rock thing (veg) [x][x] J ()
+> Cowardly wolf (meat) [x][x] ()
 > *************** (meat)
 
 Swamp 1 (Sauce) / veg =-=- 1.5 multiplier -=-=
-> Fish Thing like a merman or something idk (Sauce) [x][x]
-> Whisps like just the lights ya know? (meat) [x][x]
-> Lantern toad (Veggie) [x][x]
-> Slug leech thing (Sauce) [x][x]
+> Fish Thing like a merman or something idk (Sauce) [x][x] ()
+> Whisps like just the lights ya know? (meat) [x][x] ()
+> Lantern toad (Veggie) [x][x] J ()
+> Slug leech thing (Sauce) [x][x] ()
 ***************> Swamp thing, like seaweed (Veggie) []
 
 Swamp 2 (Meat) / sauce =-=- 2.9 multiplier -=-=
-> Lizard/gator (meat) [x][x]
-> Muck (meat) [x][x]
-> Explosive thing - spicy sauce(sauce)[x][x]
-> Mimic, looks like another enemy until attacked (meat) [x][x]
+> Lizard/gator (meat) [x][x] ()
+> Muck (meat) [x][x] ()
+> Explosive thing - spicy sauce(sauce)[x][x] ()
+> Mimic, looks like another enemy until attacked (meat) [x][x] ()
 > *******************(sauce)
 
 Fallen Kingdom 1 (Dual drop) =-=- 2.6 multiplier -=-=
-> Orbie type thing (meat/sauce) [x][x][x]
-> Fungal Infected thing(veg/sauce)[x][x][x]
-> Mushroom guy thing(veg/meat)[x][x][x]
+> Orbie type thing (meat/sauce) [x][x][x] ()
+> Fungal Infected thing(veg/sauce)[x][x][x] J ()
+> Mushroom guy thing(veg/meat)[x][x][x] ()
 >******************
 
 Fallen Kingdom 2 (Dual drop) =-=- 3.5 multiplier -=-=
-> King enemy supa rare, only one at a time(meat/sauce/veg) [x][x][x][x]
+> King enemy supa rare, only one at a time(meat/sauce/veg) [x][x][x][x] ()
 >******************
+
+
+OTHER SOUND THINGS=-=-=-=-=-=-=-=-=-=-=-=
+Player
+	attack whoosh (x)
+	death (x)
+Kitchen 
+	fridge()
+	oven()
+	pantry()
+	cut()
+	prep()
+	step done(x)
+	recipe done(x)

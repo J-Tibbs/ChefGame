@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cxqxr8kypferx"]
+[gd_scene load_steps=10 format=3 uid="uid://cxqxr8kypferx"]
 
 [ext_resource type="Script" path="res://kitchenApplliance.gd" id="1_unla8"]
 [ext_resource type="Texture2D" uid="uid://cknjag8rvgwpc" path="res://Art/Oven1.png" id="2_x88jn"]
+[ext_resource type="AudioStream" uid="uid://da37ens0w8xb2" path="res://Sounds/Environment/synth.wav" id="3_o1jd3"]
+[ext_resource type="AudioStream" uid="uid://dv5y8u2txjc1q" path="res://Sounds/Environment/oven.wav" id="4_irken"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dm0s2"]
 bg_color = Color(0.374925, 0.35644, 0.331805, 0.533333)
@@ -73,6 +75,14 @@ shape = SubResource("RectangleShape2D_0uirx")
 unique_name_in_owner = true
 wait_time = 3.0
 one_shot = true
+
+[node name="Beep" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_o1jd3")
+
+[node name="Hum" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_irken")
 
 [connection signal="body_entered" from="InteractSpot" to="InteractSpot" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractSpot" to="InteractSpot" method="_on_body_exited"]

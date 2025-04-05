@@ -41,6 +41,7 @@ func _process(delta: float) -> void:
 		canTakeOrder = false
 		var meal_name = meal_names.pick_random()
 		#var meal_ticket = orderToMeal(meal_name)
+		%Bell.play()
 		player.add_recipe([meal_name, meal_values[meal_name]])
 		#player.add_recipe(orderToMeal(meal_names.pick_random()))
 

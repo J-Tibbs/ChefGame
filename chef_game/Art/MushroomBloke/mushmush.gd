@@ -71,13 +71,12 @@ func three_fire():
 			shoot(angles_set_2)
 		
 		shots_fired += 1
+		%Attack.play()
 		using_set_1 = !using_set_1
 		get_tree().create_timer(0.3).timeout.connect(three_fire)
-	else:
-		shots_fired = 0
 		
+	%UntilBurst.start()
 
 func _on_until_burst_timeout() -> void:
 	shots_fired = 0
 	three_fire()
-	%UntilBurst.start()

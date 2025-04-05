@@ -1,0 +1,168 @@
+[gd_scene load_steps=14 format=3 uid="uid://bfkmo2xslsfva"]
+
+[ext_resource type="Script" path="res://how_to_play.gd" id="1_dwmgc"]
+[ext_resource type="Texture2D" uid="uid://5hrbg17b2wg2" path="res://Art/HelpPictures/Screenshot 2025-04-04 153321.png" id="1_tvdm8"]
+[ext_resource type="Texture2D" uid="uid://b0l4ry4scd873" path="res://Art/HelpPictures/Screenshot 2025-04-04 153338.png" id="2_y73u3"]
+[ext_resource type="Texture2D" uid="uid://d4hoqmbqb3b4t" path="res://Art/HelpPictures/Screenshot 2025-04-04 153404.png" id="3_6bhjd"]
+[ext_resource type="Texture2D" uid="uid://dbj1fi6x4cdcp" path="res://Art/HelpPictures/Screenshot 2025-04-04 153415.png" id="4_131si"]
+[ext_resource type="Texture2D" uid="uid://c2tp344axdc2h" path="res://Art/HelpPictures/Screenshot 2025-04-04 153432.png" id="5_k5yc1"]
+[ext_resource type="Texture2D" uid="uid://crag6pg4ewvfg" path="res://Art/HelpPictures/Screenshot 2025-04-04 153519.png" id="6_lucgq"]
+[ext_resource type="Texture2D" uid="uid://liij1ls6rreo" path="res://Art/HelpPictures/Screenshot 2025-04-04 153502.png" id="7_wjt2j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4blib"]
+bg_color = Color(0.869104, 0.000167206, 0.0709742, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_087uv"]
+bg_color = Color(0.999809, 0.271509, 0.237826, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o533d"]
+bg_color = Color(0.779535, 0, 0.0602419, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.780392, 0, 0.0588235, 1)
+
+[sub_resource type="Gradient" id="Gradient_7a5f1"]
+offsets = PackedFloat32Array(0.802632, 0.973684, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.618421, 0.618421, 0.618421, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0pqbm"]
+gradient = SubResource("Gradient_7a5f1")
+
+[node name="HowToPlay" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -589.0
+offset_top = -291.0
+offset_right = -589.0
+offset_bottom = -291.0
+scale = Vector2(1.96, 1.96)
+script = ExtResource("1_dwmgc")
+
+[node name="RecipeClick" type="Label" parent="."]
+layout_mode = 2
+offset_left = 38.0
+offset_top = 21.0
+offset_right = 1190.0
+offset_bottom = 44.0
+text = "Get a recipe from the front desk by standing in front of it and clicking"
+
+[node name="Sprite2D" type="Sprite2D" parent="RecipeClick"]
+position = Vector2(228, 153)
+texture = ExtResource("1_tvdm8")
+
+[node name="MakeRecipe" type="Label" parent="."]
+layout_mode = 2
+offset_left = 546.0
+offset_top = 65.0
+offset_right = 1922.0
+offset_bottom = 114.0
+text = "The recipe will be in the upper left and show what's needed. 
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="MakeRecipe"]
+position = Vector2(302, 142)
+scale = Vector2(0.674469, 0.674469)
+texture = ExtResource("2_y73u3")
+
+[node name="Stations" type="Label" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 297.0
+offset_right = 1236.0
+offset_bottom = 335.0
+theme_override_font_sizes/font_size = 19
+text = "Ingredients are found in the fridge and pantry. Grab the associated type of ingredient and go to the matching station. "
+
+[node name="Cut" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 357.0
+offset_right = 343.0
+offset_bottom = 406.0
+text = "Click 3 times to cut
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="Cut"]
+position = Vector2(75, 113)
+scale = Vector2(0.776995, 0.776995)
+texture = ExtResource("3_6bhjd")
+
+[node name="Mix" type="Label" parent="."]
+layout_mode = 0
+offset_left = 258.0
+offset_top = 347.0
+offset_right = 416.0
+offset_bottom = 370.0
+text = "Spin in circles to mix
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="Mix"]
+position = Vector2(78, 116)
+scale = Vector2(0.876238, 0.876238)
+texture = ExtResource("4_131si")
+
+[node name="Prep" type="Label" parent="."]
+layout_mode = 0
+offset_left = 479.0
+offset_top = 352.0
+offset_right = 682.0
+offset_bottom = 375.0
+text = "Look left and right to prep"
+
+[node name="Sprite2D" type="Sprite2D" parent="Prep"]
+position = Vector2(101, 119)
+scale = Vector2(0.729839, 0.729839)
+texture = ExtResource("5_k5yc1")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 924.0
+offset_top = 331.0
+offset_right = 1122.0
+offset_bottom = 380.0
+text = "Click by the trashcan 
+to get rid of an ingredient"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Label"]
+position = Vector2(96, 144)
+scale = Vector2(0.767467, 0.767467)
+texture = ExtResource("6_lucgq")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 719.0
+offset_top = 331.0
+offset_right = 901.0
+offset_bottom = 354.0
+text = "Click the oven to cook"
+
+[node name="Sprite2D" type="Sprite2D" parent="Label2"]
+position = Vector2(85, 137)
+scale = Vector2(0.914847, 0.914847)
+texture = ExtResource("7_wjt2j")
+
+[node name="Close" type="Button" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 1111.0
+offset_right = 1135.0
+offset_bottom = 43.0
+scale = Vector2(1.71998, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/hover = SubResource("StyleBoxFlat_4blib")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_087uv")
+theme_override_styles/normal = SubResource("StyleBoxFlat_o533d")
+text = "X"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -8
+texture_filter = 1
+position = Vector2(1081.5, 543.75)
+scale = Vector2(26.6539, 2829.44)
+texture = SubResource("GradientTexture1D_0pqbm")
+
+[connection signal="pressed" from="Close" to="." method="_on_close_pressed"]

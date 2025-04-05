@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6dyar24p4xni"]
+[gd_scene load_steps=8 format=3 uid="uid://b6dyar24p4xni"]
 
 [ext_resource type="Texture2D" uid="uid://bk87l7m3lm20d" path="res://Art/MushroomBloke/mushmush.png" id="1_0gwu3"]
 [ext_resource type="Script" path="res://Art/MushroomBloke/mushmush.gd" id="1_utsev"]
+[ext_resource type="AudioStream" uid="uid://cuop3q526q2x3" path="res://Sounds/MushMush/pop.wav" id="3_ybrco"]
 
 [sub_resource type="Animation" id="Animation_cebtf"]
 resource_name = "Hurt"
@@ -31,6 +32,7 @@ _data = {
 radius = 33.13
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 2
 scale = Vector2(2.6, 2.6)
 collision_layer = 2
 collision_mask = 19
@@ -52,13 +54,17 @@ libraries = {
 scale = Vector2(1.32351, 1.30257)
 shape = SubResource("CircleShape2D_sq2cy")
 
-[node name="UntilBurst" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 4.0
-one_shot = true
-
 [node name="FireSpot" type="Marker2D" parent="."]
 unique_name_in_owner = true
 
-[connection signal="timeout" from="UntilBurst" to="." method="_on_until_stuck_timeout"]
+[node name="UntilBurst" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_ybrco")
+max_distance = 2500.0
+
 [connection signal="timeout" from="UntilBurst" to="." method="_on_until_burst_timeout"]

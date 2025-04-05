@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dkkeaqc6d7l75"]
+[gd_scene load_steps=6 format=3 uid="uid://dkkeaqc6d7l75"]
 
 [ext_resource type="Script" path="res://RecipeDesk.gd" id="1_jdoqc"]
 [ext_resource type="Texture2D" uid="uid://bws8c30ru5d28" path="res://Art/RecipeTable.png" id="2_aidvt"]
+[ext_resource type="AudioStream" uid="uid://dhlw7b5s7ftjv" path="res://Sounds/Environment/bell.wav" id="3_s12jk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5eb7n"]
 radius = 3.0
@@ -41,6 +42,11 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(6.11959e-07, 7)
 shape = SubResource("RectangleShape2D_vo6iu")
+
+[node name="Bell" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_s12jk")
+volume_db = -14.0
 
 [connection signal="body_entered" from="InteractSpot" to="InteractSpot" method="_on_body_entered"]
 [connection signal="body_exited" from="InteractSpot" to="InteractSpot" method="_on_body_exited"]

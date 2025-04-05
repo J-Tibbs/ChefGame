@@ -31,7 +31,6 @@ func _on_body_entered(body: Node2D) -> void:
 			selected_type = player.ingredients[player.currentIngredient][3]
 
 		if selected_type != required_type:
-			print("Wrong ingredient! This step requires a " + required_type)
 			return  # Prevents starting the wrong step
 		
 		# Start the correct step
@@ -51,13 +50,11 @@ func _on_body_exited(body: Node2D) -> void:
 func _input(event: InputEvent) -> void:
 	if is_cutting and event is InputEventMouseButton and event.pressed:
 		cut_amount += 1
-		print("Cut Amount:", cut_amount)
 		if cut_amount >= 3:
 			reset_states()
 
 	elif is_mixing and event is InputEventMouseMotion:
 		mix_rotation += abs(event.relative.x) 
-		print("Mix Rotation:", mix_rotation)
 		if mix_rotation >= 1500:
 			reset_states()
 
@@ -69,7 +66,6 @@ func _input(event: InputEvent) -> void:
 		if prep_x >= right_mouse_x and hit_left:
 			hit_left = false
 			prep_amount += 1
-		print(prep_amount)
 		if prep_amount >= 3:
 			reset_states()
 
@@ -88,8 +84,6 @@ func start_prep() -> void:
 	prep_amount = 0
 	player.setMoving(false)
 
-func start_storage() -> void:
-	print("Storing food") 
 
 func reset_states() -> void:
 	player.lock_in_ingred()

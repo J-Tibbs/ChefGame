@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bh1t6g24p5aon"]
+[gd_scene load_steps=6 format=3 uid="uid://bh1t6g24p5aon"]
 
 [ext_resource type="Texture2D" uid="uid://dlkbfuo1ab48t" path="res://Art/QuickWall.png" id="1_ipf3w"]
 [ext_resource type="Script" path="res://pay_wall_chec.gd" id="1_oaexw"]
+[ext_resource type="AudioStream" uid="uid://b5cinsttoivrl" path="res://Sounds/Environment/doorGone.wav" id="3_w1non"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci2v8"]
 size = Vector2(118, 36)
@@ -42,5 +43,10 @@ script = ExtResource("1_oaexw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 36.5)
 shape = SubResource("RectangleShape2D_cet15")
+
+[node name="Gone" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_w1non")
+volume_db = 7.0
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

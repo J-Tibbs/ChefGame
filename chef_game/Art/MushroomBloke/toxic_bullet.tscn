@@ -8,6 +8,7 @@ radius = 13.6801
 
 [node name="Area2D" type="Area2D"]
 top_level = true
+z_index = 2
 rotation = -1.57079
 scale = Vector2(1.64112, 1.64112)
 collision_layer = 0

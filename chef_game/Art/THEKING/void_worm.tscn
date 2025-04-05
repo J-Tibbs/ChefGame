@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cj2x1abjpactj"]
+[gd_scene load_steps=18 format=3 uid="uid://cj2x1abjpactj"]
 
 [ext_resource type="Script" path="res://Art/THEKING/void_worm.gd" id="1_8ih0f"]
 [ext_resource type="Texture2D" uid="uid://f5fyix5m051h" path="res://Art/THEKING/void_worm1.png" id="1_qhmc8"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://crimanbk7nrbi" path="res://Art/THEKING/void_worm7.png" id="8_lmy3k"]
 [ext_resource type="Texture2D" uid="uid://qi7o4r3hpqng" path="res://Art/THEKING/void_worm8.png" id="9_oipus"]
 [ext_resource type="Texture2D" uid="uid://duxmu7cl7i1s0" path="res://Art/RootMan/circle.png" id="10_63mtr"]
+[ext_resource type="AudioStream" uid="uid://benjrugqkc86f" path="res://Sounds/Boss/laserShoot.wav" id="11_ei4ti"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4pu3y"]
 animations = [{
@@ -76,26 +77,26 @@ shape = SubResource("CircleShape2D_ha3tm")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="BossHealth" type="ProgressBar" parent="CanvasLayer"]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -1.0
+offset_left = -510.0
 offset_top = 58.0
-offset_right = 3.0
+offset_right = -69.0
 offset_bottom = 85.0
 grow_horizontal = 2
-scale = Vector2(235.88, 1.16128)
+scale = Vector2(2.32002, 1.16128)
 pivot_offset = Vector2(1.81115, 16)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_g8hwv")
 theme_override_styles/fill = SubResource("StyleBoxFlat_e4gxc")
-max_value = 150.0
-value = 150.0
+max_value = 225.0
+step = 0.0
+value = 225.0
 show_percentage = false
 
 [node name="AttackTimer" type="ProgressBar" parent="CanvasLayer"]
@@ -141,6 +142,11 @@ one_shot = true
 unique_name_in_owner = true
 scale = Vector2(3.5271, 3.5271)
 texture = ExtResource("10_63mtr")
+
+[node name="Fire" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_ei4ti")
+volume_db = -28.74
 
 [connection signal="timeout" from="UntilAttack" to="." method="_on_until_attack_timeout"]
 [connection signal="timeout" from="SpikeTimer" to="." method="_on_spike_timer_timeout"]

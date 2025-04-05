@@ -9,7 +9,7 @@ extends CharacterBody2D
 ]
 var SPEED = 0
 var BULLETSPEED = 600
-var HEALTH = 150
+var HEALTH = 225
 var DAMAGE = 30
 var shouldMove = true
 var spiral_shots_fired = 0
@@ -64,10 +64,12 @@ func _attacked(attack_pos, damage) -> void:
 		get_parent().add_child(honey_drop)
 		get_parent().add_child(toxin_gland)
 		get_parent().add_child(worm_meat)
-		honey_drop.global_position = drop_positions[0] + global_position
-		toxin_gland.global_position = drop_positions[1] + global_position
-		worm_meat.global_position = drop_positions[2] + global_position
+		
 		%CanvasLayer.visible = false
+		player.beat_boss()
+		honey_drop.global_position = drop_positions[0] + player.global_position
+		toxin_gland.global_position = drop_positions[1] + player.global_position
+		worm_meat.global_position = drop_positions[2] + player.global_position
 		queue_free()
 
 func _getDamage() -> float:
@@ -100,6 +102,7 @@ func spiral_attack():
 			shoot(angles_set_2, %FirePoint)
 		
 		spiral_shots_fired += 1
+		%Fire.play()
 		using_set_1 = !using_set_1
 		get_tree().create_timer(0.3).timeout.connect(spiral_attack)
 	else:
@@ -113,6 +116,7 @@ func shot_attack():
 	if shots_fired < 15:
 		shoot(three_offsets, %Targeted)
 		shots_fired += 1
+		%Fire.play()
 		get_tree().create_timer(0.3).timeout.connect(shot_attack)
 	%UntilAttack.start()
 

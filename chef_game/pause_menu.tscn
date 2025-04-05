@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dffq85otcjmt"]
+[gd_scene load_steps=5 format=3 uid="uid://dffq85otcjmt"]
 
 [ext_resource type="Script" path="res://pause_menu.gd" id="1_rtt7t"]
 [ext_resource type="Shader" path="res://pause_menu.gdshader" id="2_ilre0"]
+[ext_resource type="PackedScene" uid="uid://bfkmo2xslsfva" path="res://how_to_play.tscn" id="3_prra3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hxkec"]
 shader = ExtResource("2_ilre0")
@@ -25,28 +26,61 @@ offset_right = -575.0
 offset_bottom = -453.0
 scale = Vector2(22.52, 24.3967)
 color = Color(0.317647, 0.317647, 0.317647, 0.882353)
+metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="PauseBox" type="MarginContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = -69.0
+offset_left = -106.0
 offset_top = -59.0
-offset_right = 74.0
-offset_bottom = 59.0
+offset_right = 108.0
+offset_bottom = 120.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseBox"]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PauseBox/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Resume"
 
-[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="HowPlay" type="Button" parent="PauseBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "How To Play"
+
+[node name="Quit" type="Button" parent="PauseBox/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 35
 text = "Quit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[node name="HowToPlay" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -469.0
+offset_top = -263.0
+offset_right = 1286.0
+offset_bottom = 718.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.839999, 0.839999)
+
+[node name="CenterContainer" type="CenterContainer" parent="HowToPlay"]
+layout_mode = 2
+use_top_left = true
+
+[node name="HowToPlay1" parent="HowToPlay/CenterContainer" instance=ExtResource("3_prra3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[connection signal="pressed" from="PauseBox/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseBox/VBoxContainer/HowPlay" to="." method="_on_how_play_pressed"]
+[connection signal="pressed" from="PauseBox/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

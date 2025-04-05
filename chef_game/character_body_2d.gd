@@ -6,12 +6,13 @@ extends CharacterBody2D
 
 
 @onready var animatedSprite = $AnimatedSprite2D
+@onready var hooray = %Confetti
 @onready var cash_register = load("res://recipe_pricing.tscn").instantiate()
 var moveSpeed = 400
 var attackAnim = false
 var fire_once = 1
 var health = 200
-var money = 0
+var money = 10000
 var canMove = true
 var SHOW_NAME_INDEX = 0
 var AMOUNT_INDEX = 1
@@ -69,7 +70,10 @@ var ingredientsUsed = []
 var currentIngredient = ""
 var recipeForPricing
 
-
+func _ready() -> void:
+	%OrderTicket.visible = false
+	hooray.play("default")
+	%"THE CROWN!!!".visible = false
 func _physics_process(delta):
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var mouseClick = Input.get_action_raw_strength("MouseClick")
@@ -105,6 +109,8 @@ func player_hurt(damage) -> void:
 		
 func player_heal(heal_amount) -> void:
 	health += heal_amount
+	if health > 200:
+		health = 200
 	%ProgressBar.value = health
 
 func setMoving(can) -> void:
@@ -113,6 +119,7 @@ func getMoving() -> bool:
 	return canMove
 
 func get_ingredient(ingred_name) -> void:
+	%ItemPickUp.play()
 	ingredients[ingred_name][AMOUNT_INDEX] += 1
 	
 func update_ui(amount):
@@ -121,7 +128,7 @@ func update_ui(amount):
 func add_recipe(recipe):
 	if recipe[1] != []:
 		recipeList.append([recipe[0], recipe[1].duplicate()])
-		print(recipe)
+		
 	else:
 		pass
 	if len(recipeList) >= 1 and activeRecipe == null:
@@ -134,24 +141,28 @@ func get_current_step():
 		return currentStep  # Returns `["cut", "plant"]`
 	return null
 func end_current_step():
+	hooray.play("StepDone")
 	activeRecipe[1].pop_front()
 	if activeRecipe[1].is_empty():
 		finish_recipe()
 			
 	elif activeRecipe[1][0] != null:
+		%FinishStep.play()
 		currentStep = activeRecipe[1][0]
-		print(currentStep)
+		
 	
 	if currentStep == null:
 		%"Current Step".text = ""
 		%Recipe.text = ""
+		%OrderTicket.visible = false
 	else:	
 		%"Current Step".text = currentStep[0] + " : " + currentStep[1]
 		%Recipe.text = activeRecipe[0]
+		%OrderTicket.visible = true
 	
 func finish_recipe():
-	print("RecipeFinished!")
 	gain_money(cash_register.receive_meal(ingredientsUsed, recipeForPricing))
+	%FinishRecipe.play()
 	player_heal(100)
 	currentStep = null
 	ingredientsUsed.clear()
@@ -166,9 +177,9 @@ func update_current_recipe():
 	if recipeList[0][1] != []:
 		activeRecipe = recipeList.pop_front()
 		recipeForPricing = len(activeRecipe[1])
-		print(recipeForPricing)
 	#recipeList.pop_front()
 		currentStep = activeRecipe[1][0]
+		%OrderTicket.visible = true
 		%"Current Step".text = currentStep[0] + " : " + currentStep[1]
 		%Recipe.text = activeRecipe[0]
 		
@@ -187,6 +198,7 @@ func carry_ingred(icon: CompressedTexture2D):
 	
 func death():
 	self.global_position = %SpawnPoint.global_position
+	%Death.play()
 	lose_money((money / 3))
 	if money <= 0:
 		money = 0
@@ -228,10 +240,19 @@ func update_current_ingred(ingredient, icon: CompressedTexture2D):
 	else:
 		%Sprite2D.texture = icon
 		currentIngredient = ingredient
-		print(currentIngredient)
 
 func lock_in_ingred():
 	if currentIngredient != "":
 		ingredientsUsed.append(ingredients[currentIngredient][VALUE_INDEX])
 		ingredients[currentIngredient][AMOUNT_INDEX] -= 1
 	update_current_ingred("", null)
+
+
+func _on_confetti_animation_finished() -> void:
+	if %Confetti.animation == "StepDone":
+		hooray.stop()
+		hooray.play("default")
+
+func beat_boss():
+	self.global_position = %SpawnPoint.global_position
+	%"THE CROWN!!!".visible = true

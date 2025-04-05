@@ -20,6 +20,7 @@ func _physics_process(delta):
 	
 	if mouseClick and not attackAnim:
 		attackAnim = true
+		%Attack.play()
 		animatedSprite.play("Attack")
 		attack()
 
@@ -45,6 +46,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		
 func attack():
 	if enemies_in_area.size() > 0:
+		%Thud.play()
 		for enemy in enemies_in_area:
 			if enemy.has_method("_attacked"):
 				enemy._attacked(self.global_position, damage)

@@ -40,7 +40,6 @@ func _getDamage() -> float:
 	return DAMAGE
 	
 func despawn():
-	print("Being despawned")
 	queue_free()
 
 func shoot():

@@ -135,14 +135,19 @@ func _on_timer_timeout() -> void:
 			current_area = area_name
 			spawn_mob()
 			break
-#I BELIEVE DOWN HERE IS THE KING SOLO CHECK
 
 func pause_game():
 	pause_menu.global_position = player.global_position
+	
 	if isPaused:
 		pause_menu.hide()
 		Engine.time_scale = 1
 	else:
+		pause_menu.remove_howto()
 		pause_menu.show()
 		Engine.time_scale = 0
 	isPaused = !isPaused
+
+
+func _on_portal_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.

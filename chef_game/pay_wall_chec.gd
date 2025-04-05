@@ -15,7 +15,7 @@ func _ready() -> void:
 		cost = 750
 	if get_parent().is_in_group("cave_two"):
 		cost = 500
-	if get_parent().is_in_group("caslte"):
+	if get_parent().is_in_group("castle"):
 		cost = 750
 	if get_parent().is_in_group("swamp_two"):
 		cost = 1500
@@ -32,4 +32,5 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player"):
 		if body.get_current_money() >= cost:
 			body.lose_money(cost)
+			%Gone.play()
 			self.get_parent().queue_free()

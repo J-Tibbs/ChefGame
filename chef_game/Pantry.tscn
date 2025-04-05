@@ -1,9 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://yqps640n5yxx"]
+[gd_scene load_steps=10 format=3 uid="uid://yqps640n5yxx"]
 
 [ext_resource type="Script" path="res://kitchenApplliance.gd" id="1_21luu"]
 [ext_resource type="Texture2D" uid="uid://8ycg3sylea5b" path="res://Art/FoodIcons/BasicVeggie.png" id="1_np10g"]
 [ext_resource type="Texture2D" uid="uid://c8fmhxpncbkm6" path="res://Art/FoodIcons/BasicSauce.png" id="2_7txq0"]
 [ext_resource type="Texture2D" uid="uid://dgksc8o37oa3w" path="res://Art/Pantry.png" id="4_jgb41"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nvdf3"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucuna"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5eb7n"]
 radius = 5.0
@@ -22,10 +30,12 @@ collision_mask = 3
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+layer = 3
 visible = false
 
 [node name="ItemList" type="ItemList" parent="CanvasLayer"]
 unique_name_in_owner = true
+z_index = 10
 texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -33,9 +43,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -250.0
-offset_top = -250.0
+offset_top = -202.0
 offset_right = 250.0
-offset_bottom = 250.0
+offset_bottom = 298.0
 grow_horizontal = 2
 grow_vertical = 2
 item_count = 2
@@ -46,6 +56,37 @@ item_0/text = "Vegetable?"
 item_0/icon = ExtResource("1_np10g")
 item_1/text = "Sauce?"
 item_1/icon = ExtResource("2_7txq0")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.496
+anchor_top = 0.5
+anchor_right = 0.496
+anchor_bottom = 0.5
+offset_left = -127.392
+offset_top = -306.0
+offset_right = 126.608
+offset_bottom = -232.0
+theme_override_font_sizes/font_size = 54
+theme_override_styles/normal = SubResource("StyleBoxFlat_nvdf3")
+text = "Pantry"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.496
+anchor_top = 0.5
+anchor_right = 0.496
+anchor_bottom = 0.5
+offset_left = -127.392
+offset_top = -232.0
+offset_right = 126.608
+offset_bottom = -202.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ucuna")
+text = "Double Click an item to choose it
+"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="InteractSpot" type="Area2D" parent="." groups=["Pantry"]]
 script = ExtResource("1_21luu")
